@@ -1,6 +1,6 @@
 // JSX significa que ESSE ARQUIVO AQUI É UM COMPONENTE REACT (ou seja, por isso q é bom tu pôr na extensão do arquivo)
 import { useNavigate } from "react-router-dom"; /* O useNavigate é um hook do react-router-dom que permite navegar para outra página, ou seja, ele é usado para redirecionar o usuário para outra página quando ele clicar em uma tarefa */
-import { ChevronRightIcon, Trash2 } from "lucide-react";
+import { ChevronRightIcon, Trash2, CheckIcon } from "lucide-react";
 import Button from "./Button";
 
 /* eslint-disable react/prop-types */ /* Aqui eu estou desabilitando a regra de prop-types do eslint, ou seja, eu não vou precisar definir os tipos das props que eu estou passando para o componente Tasks, isso é útil para evitar erros de tipo, mas é importante lembrar que isso pode causar erros se eu passar uma prop com um tipo diferente do que o componente espera, então é importante ter cuidado ao usar essa regra */
@@ -22,9 +22,10 @@ function Tasks({tasks, onTaskClick, onTrashClick}){ /* Aqui eu estou usando a de
             <li key={task.id} className="flex gap-2">
                 <Button
                     onClick={() => onTaskClick(task.id)} 
-                    className={`bg-slate-400 text-white p-2 w-full rounded-md text-left 
+                    className={`bg-slate-400 text-white flex items-center gap-2 p-2 w-full rounded-md text-left 
                         ${task.isCompleted && 'line-through'}`}
                     >
+                        {task.isCompleted && <CheckIcon />} {/* Aqui eu estou usando o operador lógico && para renderizar o ícone de check apenas se a tarefa estiver marcada como concluída, ou seja, se a propriedade isCompleted da tarefa for true, o ícone de check vai ser renderizado, caso contrário, ele não vai ser renderizado */}
                         {task.title}
                 </Button>
                 <Button onClick={() => onSeeDetailsClick(task)} className="bg-slate-400 text-white p-2 rounded-md">
